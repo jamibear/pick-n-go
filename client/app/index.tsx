@@ -23,7 +23,7 @@ export default function App({ navigation }) {
 
   return (
     <View>
-      {session && session.user ? navigation.push("farmer") : <Auth />}
+      {session && session.user ? navigation.push("authentication") : <Auth />}
     </View>
   );
   // return <View>{session && session.user ? <Account /> : <Auth />}</View>;

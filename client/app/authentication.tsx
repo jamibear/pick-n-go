@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { FlatList, Text } from "react-native";
-import { supabase } from "../../lib/supabase";
-import Profile from "../../components/Profile"
+import { useState, useEffect } from "react";
+import { supabase } from "../lib/supabase";
+import { Text, View } from "react-native";
+import Onboarding from "../components/Onboarding";
 
-export default function Page() {
+export default function Authentication({ navigation }) {
   const [user, setUser] = useState([
     {
       full_name: "",
@@ -34,21 +34,17 @@ export default function Page() {
   };
 
   useEffect(() => {
+    getData();
     getUser();
-  });
+  }, []);
+
   return (
-    <FlatList
-      data={user}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <Profile
-          id={item.id}
-          name={item.full_name}
-          username={item.username}
-          bio={item.bio}
-          avatar={item.avatar_url}
-        />
+    <View>
+      { user[0].username || user[0].user_role ? (
+        navigation.push(user[0].user_role)
+      ) : (
+        <Onboarding />
       )}
-    />
+    </View>
   );
 }

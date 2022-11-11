@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { FlatList, Text } from "react-native";
-import { supabase } from "../../lib/supabase";
-import Profile from "../../components/Profile"
+import { FlatList, Text, View } from "react-native";
+import { Input } from "@rneui/base";
+import { supabase } from "../lib/supabase";
+import  ProfileEditView from "../components/ProfileEditView"
 
-export default function Page() {
+export default function editProfile() {
   const [user, setUser] = useState([
     {
       full_name: "",
@@ -16,6 +17,7 @@ export default function Page() {
       updated_at: "",
     },
   ]);
+
   // get the userId from supabse session
   const getData = async () => {
     const {
@@ -35,18 +37,17 @@ export default function Page() {
 
   useEffect(() => {
     getUser();
-  });
+  }, []);
   return (
     <FlatList
       data={user}
-      keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <Profile
+        <ProfileEditView
           id={item.id}
-          name={item.full_name}
+          avatar={item.avatar_url}
+          fullname={item.full_name}
           username={item.username}
           bio={item.bio}
-          avatar={item.avatar_url}
         />
       )}
     />

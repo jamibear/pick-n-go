@@ -23,7 +23,18 @@ type Product = {
 };
 
 export default function Page() {
-  const [items, setItems] = useState<Product[]>([]);
+  const [items, setItems] = useState<Product[]>([
+    {
+      id: "",
+      title: "",
+      description: "",
+      price: 0,
+      variant: "",
+      sold: 0,
+      img_url: "",
+      created_at: "",
+    },
+  ]);
 
   const getUserId = async () => {
     const {
@@ -41,20 +52,8 @@ export default function Page() {
   };
 
   useEffect(() => {
-    setItems([
-      {
-        id: "",
-        title: "",
-        description: "",
-        price: 0,
-        variant: "",
-        sold: 0,
-        img_url: "",
-        created_at: "",
-      },
-    ]);
     getData();
-  }, []);
+  });
 
   return (
     <SafeAreaView>
