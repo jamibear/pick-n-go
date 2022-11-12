@@ -1,5 +1,6 @@
 {
   "expo": {
+    "jsEngine": "hermes",
     "scheme": "client",
     "name": "client",
     "slug": "client",
@@ -27,6 +28,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
+    }
   }
 }

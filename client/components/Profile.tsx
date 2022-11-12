@@ -5,22 +5,60 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
+import { useState } from "react";
 import { Button } from "@rneui/base";
-import { Link } from "expo-router";
+import { Link, useLink } from "expo-router";
 import { supabase } from "../lib/supabase";
+
+const LogoutButton = () => {
+  const [loading, setLoading] = useState(false);
+  const link = useLink();
+
+  const handleLogout = async () => {
+    setLoading(true);
+    await supabase.auth.signOut();
+    setLoading(false);
+    link.push("/");
+  };
+
+  return (
+    <TouchableOpacity
+      style={{
+        padding: 21,
+        flex: 1,
+        justifyContent: "center",
+        borderTopWidth: 1,
+        borderTopColor: "#efefef",
+      }}
+      onPress={handleLogout}
+    >
+      {loading ? (
+        <ActivityIndicator color="#3350ee" size="large" />
+      ) : (
+        <Text style={{ textAlign: "center", fontSize: 18, color: "#3350ee" }}>
+          Logout
+        </Text>
+      )}
+    </TouchableOpacity>
+  );
+};
 
 export default function Profile({ id, name, username, bio, avatar }) {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      contentContainerStyle={{
+        flexGrow: 1,
+        backgroundColor: "white",
+      }}
+    >
       <View style={styles.edit}>
-          <Button size="sm" radius="xl">
-        <Link href="editProfile">
-            edit profile
-        </Link>
-          </Button>
+        <Button size="sm" radius="xl">
+          <Link href="editProfile">edit profile</Link>
+        </Button>
       </View>
-      <Image style={styles.avatar} source={{ uri: avatar }} />
+      <Image style={styles.avatar} source={avatar ? { uri: avatar } : null} />
       <View>
         <Text style={styles.info}>{name}</Text>
         <Text style={styles.info}>@{username}</Text>
@@ -28,24 +66,15 @@ export default function Profile({ id, name, username, bio, avatar }) {
       <View style={styles.bio}>
         <Text>{bio ? bio : "Say something about yourself"}</Text>
       </View>
-      <Link href="/">
-        <TouchableOpacity
-          onPress={() => {
-            supabase.auth.signOut();
-          }}
-        >
-          <Text style={styles.logout}>Logout</Text>
-        </TouchableOpacity>
-      </Link>
+      <LogoutButton />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
+    flex: 1,
     backgroundColor: "white",
-    flexDirection: "column",
     textAlign: "center",
   },
   avatar: {
@@ -70,12 +99,5 @@ const styles = StyleSheet.create({
   edit: {
     margin: 10,
     alignSelf: "flex-end",
-  },
-
-  logout: {
-    textAlign: "center",
-    fontSize: 18,
-    color: "#6666cc",
-    padding: 30,
   },
 });

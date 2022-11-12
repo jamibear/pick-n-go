@@ -47,7 +47,7 @@ export default function CardItemCard({
         borderBottomColor: "#efefef",
       }}
     >
-      <Image source={{ uri: thumbnail }} style={{ width: 35, height: 35 }} />
+      <Image source={ thumbnail ? { uri: thumbnail } : null } style={{ width: 35, height: 35 }} />
       <Text>{title}</Text>
       <Text>{price}</Text>
       <Text>{quantity}</Text>

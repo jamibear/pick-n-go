@@ -32,17 +32,21 @@ export default function InventoryCard({
         <TouchableOpacity>
           <Image
             style={styles.tinyLogo}
-            source={{
-              uri: img_url,
-            }}
+            source={
+              img_url
+                ? {
+                    uri: img_url,
+                  }
+                : null
+            }
           />
           <Text>{title}</Text>
           <Text>Price: {price}</Text>
           <Text>Sold: {sold}</Text>
         </TouchableOpacity>
       </Link>
-      <TouchableOpacity onPress={handleDelete}>
-        <Text>Delete</Text>
+      <TouchableOpacity style={{ width: 45 }} onPress={handleDelete}>
+        <Text style={{ color: "red" }}>Delete</Text>
       </TouchableOpacity>
     </View>
   );
@@ -51,8 +55,9 @@ export default function InventoryCard({
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: "#fefefe",
-    borderBottomColor: "1px solid gray",
+    backgroundColor: "white",
+    borderBottomColor: "#eeeeee",
+    borderBottomWidth: 1,
   },
   tinyLogo: {
     width: 50,

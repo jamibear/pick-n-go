@@ -2,12 +2,13 @@ import { supabase } from "../../../lib/supabase";
 import {
   List,
   Alert,
+  TouchableOpacity,
   FlatList,
   Text,
   ScrollView,
   SafeAreaView,
 } from "react-native";
-import { Link } from "expo-router";
+import { useLink } from "expo-router";
 import { useEffect, useState } from "react";
 import InventoryCard from "../../../components/InventoryCard";
 
@@ -23,6 +24,7 @@ type Product = {
 };
 
 export default function Page() {
+  const link = useLink();
   const [items, setItems] = useState<Product[]>([
     {
       id: "",
@@ -53,12 +55,31 @@ export default function Page() {
 
   useEffect(() => {
     getData();
-  },[items]);
+  }, [items]);
 
   return (
     <SafeAreaView>
-      <Link href="/farmer/products/add">Add new product</Link>
-      <Text>My Products</Text>
+      <TouchableOpacity
+        style={{ padding: 21, backgroundColor: "#4cbb17" }}
+        onPress={() => link.push("/farmer/products/add")}
+      >
+        <Text
+          style={{ textAlign: "center", fontWeight: "bold", color: "white" }}
+        >
+          [+] Add New Product
+        </Text>
+      </TouchableOpacity>
+      <Text
+        style={{
+          borderBottomColor: "#eeeeee",
+          borderBottomWidth: 1,
+          padding: 21,
+          fontSize: 15,
+          backgroundColor: "white",
+        }}
+      >
+        My Products
+      </Text>
       <FlatList
         data={items}
         renderItem={({ item }) => (
@@ -72,6 +93,7 @@ export default function Page() {
           />
         )}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={{ paddingBottom: 150 }}
       />
     </SafeAreaView>
   );
