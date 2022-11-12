@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
 import { Alert, FlatList, ScrollView, Text } from "react-native";
 import { supabase } from "../../../lib/supabase";
-import { Product } from "typings";
 import ProductView from "../../../components/ProductView";
 
 export default function ProductInfo({ route }) {
-  const [item, setItem] = useState<Product[]>([
+  const [item, setItem] = useState([
     {
-      id: "",
-		user_id: "",
-      title: "",
-      description: "",
-      price: 0,
-      variant: "",
-      sold: 0,
-      img_url: "",
-      created_at: "",
+      prd_id: "",
+      prd_img: "",
+      prd_title: "",
+      prd_desc: "",
+      prd_price: 0,
+      prd_variant: "",
+      prf_id: "",
+      prf_username: "",
+      prf_pic: "",
     },
   ]);
 
   const getData = async () => {
-    const { data } = await supabase
-      .from("products")
+    const { data, error } = await supabase
+      .from("product_view")
       .select("*")
-      .eq("id", route.params.id);
+      .eq("prd_id", route.params.id);
     setItem(data!);
+    if (error) Alert.alert(error.message);
   };
 
   useEffect(() => {
@@ -36,12 +36,15 @@ export default function ProductInfo({ route }) {
       data={item}
       renderItem={({ item }) => (
         <ProductView
-          id={item.id}
-          title={item.title}
-          desc={item.description}
-          price={item.price}
-          variant={item.variant}
-          img={item.img_url}
+          prd_id={item.prd_id}
+          prd_img={item.prd_img}
+          prd_title={item.prd_title}
+          prd_desc={item.prd_desc}
+          prd_price={item.prd_price}
+          prd_variant={item.prd_variant}
+          prf_id={item.prf_id}
+          prf_username={item.prf_username}
+          prf_pic={item.prf_pic}
         />
       )}
     />

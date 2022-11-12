@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, SafeAreaView, Text, View } from "react-native";
 import { Input } from "@rneui/base";
 import { supabase } from "../lib/supabase";
 import  ProfileEditView from "../components/ProfileEditView"
@@ -39,6 +39,7 @@ export default function editProfile() {
     getUser();
   }, []);
   return (
+	 <SafeAreaView>
     <FlatList
       data={user}
       renderItem={({ item }) => (
@@ -51,5 +52,6 @@ export default function editProfile() {
         />
       )}
     />
+	 </SafeAreaView>
   );
 }

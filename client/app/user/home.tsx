@@ -29,6 +29,7 @@ export default function Page() {
 
   return (
     <View>
+	 	<Text>Browse Products</Text>
       <FlatList
         data={items}
         numColumns={2}

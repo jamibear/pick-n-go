@@ -1,4 +1,4 @@
-import { Alert, Text, View } from "react-native";
+import { Alert, SafeAreaView, Text, View } from "react-native";
 import { useState } from "react";
 import { Button, Input } from "@rneui/base";
 import { supabase } from "../lib/supabase"
@@ -27,7 +27,7 @@ export default function ProfileEditView({
 	}
 
 	return (
-		<View>
+		<SafeAreaView>
 			<Input
 				label="Full Name"
 				onChangeText={(text) => setNewName(text)}
@@ -56,6 +56,6 @@ export default function ProfileEditView({
 				loading={loading}
 				onPress={saveChanges}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 }
