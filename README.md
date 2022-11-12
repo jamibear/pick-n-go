@@ -1,11 +1,11 @@
 Clone the repository
 ```
-git clone https://github.com/jamibear/pick-n-go.git
+git clone https://github.com/jamibear/pick-n-go.git pickngo
 ```
-Go to client/ directory and open any code editor
+Go to pickngo/client/ directory and open any code editor
 
 ```
-cd client/
+cd pickngo/client/
 ```
 Launch terminal in code editor and npm install dependencies in client/
 
