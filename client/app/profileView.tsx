@@ -5,18 +5,16 @@ import ViewFarmerProfile from "../components/ViewFarmerProfile";
 import ProductCard from "../components/ProductCard";
 
 export default function profileView({ route }) {
-  const [user, setUser] = useState([
-    {
-      full_name: "",
-      avatar_url: "",
-      id: "",
-      username: "",
-      bio: "",
-      website: "",
-      user_role: "",
-      updated_at: "",
-    },
-  ]);
+  const [user, setUser] = useState({
+    full_name: "",
+    avatar_url: "",
+    id: "",
+    username: "",
+    bio: "",
+    website: "",
+    user_role: "",
+    updated_at: "",
+  });
   const [items, setItems] = useState([
     {
       id: "",
@@ -36,7 +34,7 @@ export default function profileView({ route }) {
       .from("profiles")
       .select("*")
       .eq("id", route.params.id);
-    setUser(data!);
+    setUser(data![0]);
   };
 
   // get farmer's products
@@ -54,31 +52,14 @@ export default function profileView({ route }) {
   }, []);
 
   return (
-    <View>
-      <FlatList
-        data={user}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ViewFarmerProfile
-            id={item.id}
-            name={item.full_name}
-            username={item.username}
-            bio={item.bio}
-            avatar={item.avatar_url}
-          />
-        )}
+    <>
+      <ViewFarmerProfile
+        id={user.id}
+        name={user.full_name}
+        username={user.username}
+        bio={user.bio}
+        avatar={user.avatar_url}
       />
-      <Text
-        style={{
-          backgroundColor: "white",
-          borderBottomWidth: 1,
-          borderBottomColor: "#efefef",
-          padding: 10,
-          fontSize: 18,
-        }}
-      >
-        Products
-      </Text>
       <FlatList
         data={items}
         numColumns={2}
@@ -93,6 +74,6 @@ export default function profileView({ route }) {
         )}
         keyExtractor={(item) => item.id}
       />
-    </View>
+    </>
   );
 }

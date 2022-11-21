@@ -8,13 +8,12 @@ const UltimateHeader = () => {
     <View
       style={{
         flex: 1,
+        flexDirection: "row",
         alignContent: "space-between",
       }}
     >
       <Text>pickngo</Text>
-      <TouchableOpacity
-        onPress={() => link.push("user/cart")}
-      >
+      <TouchableOpacity onPress={() => link.push("user/cart")}>
         <Text>Cart</Text>
       </TouchableOpacity>
     </View>

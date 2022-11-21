@@ -6,7 +6,7 @@ import { Text, View } from "react-native";
 import { Session } from "@supabase/supabase-js";
 import { Redirect } from "expo-router";
 
-export default function App({ navigation }) {
+export default function App() {
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState<Session | null>(null);
 

@@ -10,9 +10,9 @@ import { Button } from "@rneui/base";
 import { useLink } from "expo-router";
 
 export default function ViewFarmerProfile({ id, name, username, bio, avatar }) {
-  const link = useLink()
+  const link = useLink();
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Image style={styles.avatar} source={{ uri: avatar }} />
       <View>
         <Text style={styles.info}>{name}</Text>
@@ -21,16 +21,23 @@ export default function ViewFarmerProfile({ id, name, username, bio, avatar }) {
       <View style={styles.bio}>
         <Text>{bio ? bio : `hello im farmer ${username}`}</Text>
       </View>
-		<Button onPress={() => link.push({pathname: 'user/chat/[id]', params: {id: id}})} title="Message"/>
-    </ScrollView>
+      <Button
+        style={{ margin: 30 }}
+        onPress={() =>
+          link.push({
+            pathname: "inbox/chat",
+            params: { id: id },
+          })
+        }
+        title="Message"
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
     backgroundColor: "white",
-    flexDirection: "column",
     textAlign: "center",
   },
   avatar: {
