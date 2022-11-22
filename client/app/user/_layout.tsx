@@ -51,14 +51,6 @@ export default function Home() {
       />
       <Tabs.Screen
         // Name of the route to hide.
-        name="product/[id]"
-        options={{
-          // This tab will no longer show up in the tab bar.
-          href: null,
-        }}
-      />
-      <Tabs.Screen
-        // Name of the route to hide.
         name="cart"
         options={{
           // This tab will no longer show up in the tab bar.

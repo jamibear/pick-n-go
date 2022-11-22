@@ -16,6 +16,12 @@ export default function Home() {
         }}
       />
       <Tabs.Screen
+        name="chat"
+        options={{
+          href: "/farmer/chat",
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           href: "/farmer/profile",

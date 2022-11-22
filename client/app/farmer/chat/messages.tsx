@@ -38,7 +38,7 @@ export default function Messages() {
 
   useEffect(() => {
     getUserMessages();
-  }, []);
+  }, [inbox]);
 
   return (
     <View>
@@ -47,10 +47,12 @@ export default function Messages() {
           data={inbox}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => link.push({
-                pathname: "inbox/chat",
-                params: { id: item.other_user_id },
-              })}
+              onPress={() =>
+                link.push({
+                  pathname: "inbox/chat",
+                  params: { id: item.other_user_id },
+                })
+              }
               style={{
                 backgroundColor: "white",
                 padding: 9,

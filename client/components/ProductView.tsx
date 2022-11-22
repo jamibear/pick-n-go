@@ -41,13 +41,11 @@ export default function ProductView({
 
   const addToCart = async () => {
     setLoading(true);
-    const { error } = await supabase
-      .from("cart")
-      .insert({
-        user_id: await GetUserId(),
-        product_id: prd_id,
-        price: prd_price,
-      });
+    const { error } = await supabase.from("cart").insert({
+      user_id: await GetUserId(),
+      product_id: prd_id,
+      price: prd_price,
+    });
     error ? incrementCart() : Alert.alert("Item added to cart");
     setLoading(false);
   };
@@ -56,7 +54,7 @@ export default function ProductView({
     <View>
       <Image
         style={{ width: "100%", minHeight: 350 }}
-        source={{ uri: prd_img }}
+        source={prd_img ? { uri: prd_img } : null}
       />
       <Text>{prd_title}</Text>
       <Text>{prd_price}/prd_variant</Text>
@@ -69,7 +67,7 @@ export default function ProductView({
       >
         <Image
           style={{ borderRadius: 99, width: 35, height: 35 }}
-          source={{ uri: prf_pic }}
+          source={prf_pic ? { uri: prf_pic } : null}
         />
         <Text style={{ fontWeight: "bold" }}>@{prf_username}</Text>
       </TouchableOpacity>
