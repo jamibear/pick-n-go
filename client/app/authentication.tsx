@@ -15,7 +15,7 @@ export default function Authentication({ navigation }) {
       username: "",
       bio: "",
       website: "",
-      user_role: "",
+      user_type: "",
       updated_at: "",
     },
   ]);
@@ -43,10 +43,10 @@ export default function Authentication({ navigation }) {
   }, []);
 
   const UserIsAuth = () => {
-    if (!user[0].user_role || !user[0].username) {
+    if (!user[0].user_type || !user[0].username) {
       return <Onboarding />;
     }
-    return <Redirect href={user[0].user_role}/>;
+    return <Redirect href={user[0].user_type}/>;
   };
 
   return (

@@ -35,7 +35,7 @@ export default function Page() {
 
   useEffect(() => {
     getUser();
-  });
+  }, [user]);
   return (
     <FlatList
       data={user}
