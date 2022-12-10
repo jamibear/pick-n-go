@@ -27,6 +27,7 @@ const UltimateHeader = () => {
 };
 
 export default function Home() {
+  const iconSize = 30;
   return (
     <Tabs>
       <Tabs.Screen
@@ -35,8 +36,14 @@ export default function Home() {
           href: "/user/home",
           headerTitle: (props) => <UltimateHeader {...props} />,
           tabBarIcon: ({ color, size }) => (
-            <Feather name="home" size={size} color={color} />
+            <Feather name="home" size={iconSize} color={color} />
           ),
+          tabBarActiveTintColor: "#22c55e",
+          headerShadowVisible: false,
+          tabBarStyle: {
+            elevation: 0,
+            outerHeight: 30,
+          },
         }}
       />
       <Tabs.Screen
@@ -44,8 +51,14 @@ export default function Home() {
         options={{
           href: "/user/orders",
           tabBarIcon: ({ color, size }) => (
-            <Feather name="package" size={size} color={color} />
+            <Feather name="truck" size={iconSize} color={color} />
           ),
+          tabBarActiveTintColor: "#22c55e",
+          headerShadowVisible: false,
+          tabBarStyle: {
+            elevation: 0,
+            outerHeight: 30,
+          },
         }}
       />
       <Tabs.Screen
@@ -53,12 +66,14 @@ export default function Home() {
         options={{
           href: "/user/chat",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name="ios-chatbubble-ellipses-outline"
-              size={size}
-              color={color}
-            />
+            <Feather name="message-square" size={iconSize} color={color} />
           ),
+          tabBarActiveTintColor: "#22c55e",
+          headerShadowVisible: false,
+          tabBarStyle: {
+            elevation: 0,
+            outerHeight: 30,
+          },
         }}
       />
       <Tabs.Screen
@@ -66,8 +81,14 @@ export default function Home() {
         options={{
           href: "/user/profile",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="user" size={size} color={color} />
+            <Feather name="smile" size={iconSize} color={color} />
           ),
+          tabBarActiveTintColor: "#22c55e",
+          headerShadowVisible: false,
+          tabBarStyle: {
+            elevation: 0,
+            outerHeight: 30,
+          },
         }}
       />
       <Tabs.Screen
