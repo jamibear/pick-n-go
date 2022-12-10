@@ -1,18 +1,20 @@
+## Please install the Expo Go app from the app store
+
 Clone the repository
 ```
-git clone https://github.com/jamibear/pick-n-go.git pickngo
+$ git clone https://github.com/jamibear/pick-n-go.git pickngo
 ```
-Go to pickngo/client/ directory and open any code editor
+Go to client directory which is the entry point of the app
 
 ```
-cd pickngo/client/
+$ cd pickngo/client/
 ```
-Launch terminal in code editor and npm install dependencies in client/
+Setting up Expo
 
 ```
-npm install
+$ npm install
 ```
-Start the expo server
+Start the expo server and scan QR code using the Expo Go app
 ```
-npx expo start
+$ npx expo start
 ```
