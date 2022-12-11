@@ -13,14 +13,7 @@ import tw from "twrnc";
 
 export default function Delivery() {
   const [orders, setOrders] = useState({});
-
-  const cancelOrder = async (id) => {
-    const { error } = await supabase
-      .from("order_details")
-      .update({ status: "canceled" })
-      .eq("id", id);
-    if (error) Alert.alert(error.message);
-  };
+  const [loading, setLoading] = useState(true);
 
   const orderDetails = supabase
     .channel("public:order_list")
@@ -44,19 +37,20 @@ export default function Delivery() {
     const { data, error } = await supabase
       .from("order_list")
       .select()
-      .eq("ord_user_id", await userId())
-      .or("ord_status.eq.pending,ord_status.eq.to%20ship");
+      .eq("ord_farm_id", await userId())
+      .eq("ord_status", "shipping");
 
     error ? Alert.alert("error fetching order list") : setOrders(data);
   };
 
   useEffect(() => {
     fetchData();
+    setLoading(false);
   }, [orders]);
 
   return (
     <>
-      {orders && (
+      {loading && orders ? (
         <FlatList
           data={orders}
           renderItem={({ item }) => (
@@ -72,7 +66,7 @@ export default function Delivery() {
                     source={item.avatar_url ? { uri: item.avatar_url } : null}
                     style={tw`w-8 h-8 rounded-full`}
                   />
-                  <Text style={tw`font-bold mx-2`}>{item.farm_username}</Text>
+                  <Text style={tw`font-bold mx-2`}>{item.user_username}</Text>
                 </View>
                 <Text
                   style={tw`self-start text-green-500 border-2 border-green-600 rounded-full px-2`}
@@ -94,18 +88,16 @@ export default function Delivery() {
               <Text style={tw`text-lg text-right font-bold`}>
                 Total: P{item.ord_total}
               </Text>
-              {item.ord_status === "pending" && (
-                <TouchableOpacity
-                  style={tw`border-t-[1px] pt-2 mt-2 border-gray-300`}
-                  onPress={() => cancelOrder(item.ord_id)}
-                >
-                  <Text style={tw`text-right text-gray-400`}>Cancel</Text>
-                </TouchableOpacity>
-              )}
             </View>
           )}
           keyExtractor={(item, index) => index.toString()}
         />
+      ) : (
+        <View style={tw`flex-1 justify-center`}>
+          <Text style={tw`text-2xl font-bold text-gray-300 text-center`}>
+            You have no orders currently shipping
+          </Text>
+        </View>
       )}
     </>
   );
