@@ -10,6 +10,7 @@ export default function () {
         color="#cfdfdf"
         style={{ alignSelf: "center" }}
       />
+
       <Text
         style={{
           textAlign: "center",

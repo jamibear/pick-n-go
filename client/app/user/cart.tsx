@@ -73,25 +73,42 @@ export default function Cart() {
     setLoading(true);
     const order_name = randomString();
     const userId = await getUser();
+    const products = [];
+    let total = 0;
     for (const item of cart) {
-      const { data, error } = await supabase.from("order_details").insert([
-        {
-          user_id: userId,
-          item_id: item.prd_id,
-          farm_id: item.prd_farm_id,
-          order_name: order_name,
-          quantity: item.prd_quantity,
-          total: item.prd_quantity * item.prd_price,
-          status: "pending",
-        },
-      ]);
-      error
-        ? Alert.alert(error.message)
-        : Alert.alert("Order is successfully created");
+      products.push({
+        item_id: item.prd_id,
+		  name: item.prd_title,
+        quantity: item.prd_quantity,
+        price: item.prd_price,
+      });
+      total = item.prd_quantity * item.prd_price + total;
     }
-    const { error } = await supabase.from("cart").delete().eq("user_id", userId);
-    if (error) Alert.alert(error.message);
-    setLoading(false);
+
+    const { error } = await supabase.from("order_details").insert([
+      {
+        user_id: userId,
+        item_id: products,
+        farm_id: cart[0].prd_farm_id,
+        order_name: order_name,
+        total: total,
+        status: "pending",
+      },
+    ]);
+    error
+      ? Alert.alert(error.message)
+      : Alert.alert("Order is successfully created");
+
+    const deleteCart = async () => {
+      const { error } = await supabase
+        .from("cart")
+        .delete()
+        .eq("user_id", userId);
+      if (error) Alert.alert(error.message);
+      setLoading(false);
+    };
+
+    deleteCart();
   };
 
   return (

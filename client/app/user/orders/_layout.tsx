@@ -1,7 +1,8 @@
 import React from "react";
 import { Tab, Text, TabView } from "@rneui/themed";
 import tw from "twrnc";
-import Delivery from 'screens/orders/Delivery'
+import Delivery from "screens/orders/Delivery";
+import History from "screens/orders/History"
 
 export default () => {
   const [index, setIndex] = React.useState(0);
@@ -35,7 +36,7 @@ export default () => {
           <Delivery />
         </TabView.Item>
         <TabView.Item style={{ backgroundColor: "white", width: "100%" }}>
-          <Text h1>History</Text>
+          <History/>
         </TabView.Item>
       </TabView>
     </>

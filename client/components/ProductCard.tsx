@@ -19,9 +19,9 @@ export default function ProductCard({ id, title, price, variant, img_url }) {
       >
         <Image
           style={styles.tinyLogo}
-          source={{
+          source={ img_url ? {
             uri: img_url,
-          }}
+          } : null}
         />
         <Text>{title}</Text>
         <Text>
