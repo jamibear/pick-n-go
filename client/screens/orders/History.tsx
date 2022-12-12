@@ -37,7 +37,7 @@ export default function Delivery() {
       .from("order_list")
       .select()
       .eq("ord_user_id", await userId())
-      .or("ord_status.eq.canceled,ord_status.eq.recieved");
+      .or("ord_status.eq.cancelled,ord_status.eq.recieved");
 
     error ? Alert.alert("error fetching order list") : setOrders(data);
   };

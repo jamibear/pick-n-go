@@ -17,7 +17,7 @@ export default function Delivery() {
   const cancelOrder = async (id) => {
     const { error } = await supabase
       .from("order_details")
-      .update({ status: "canceled" })
+      .update({ status: "cancelled" })
       .eq("id", id);
     if (error) Alert.alert(error.message);
   };

@@ -61,7 +61,7 @@ export default function ProductView({
       >
         <Image
           style={{ borderRadius: 99, width: 35, height: 35 }}
-          source={{ uri: prf_pic }}
+          source={prf_pic ? { uri: prf_pic } : null}
         />
         <Text style={tw`font-bold my-3`}>@{prf_username}</Text>
       </TouchableOpacity>

@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
 import { GetUserId } from "../../lib/helpers";
 import { supabase } from "../../lib/supabase";
@@ -78,7 +79,7 @@ export default function Cart() {
     for (const item of cart) {
       products.push({
         item_id: item.prd_id,
-		  name: item.prd_title,
+        name: item.prd_title,
         quantity: item.prd_quantity,
         price: item.prd_price,
       });
@@ -157,23 +158,25 @@ export default function Cart() {
             flex: 1,
             backgroundColor: "white",
             justifyContent: "flex-end",
-            alignItems: "center",
             height: 200,
           }}
         >
-          <Text>Your Items</Text>
+          <Text style={tw`text-xl m-3`}>Your Items</Text>
           <FlatList
             data={cart}
             renderItem={({ item }) => (
               <>
-                <Text>{item.prd_img_url}</Text>
+                <Image
+                  source={item.prd_img_url ? { uri: item.prd_img_url } : null}
+                  style={tw`h-10 w-10`}
+                />
                 <Text>{item.prd_title}</Text>
                 <Text>x{item.prd_quantity}</Text>
-                <Text style={tw`font-bold`}>P{item.prd_price}</Text>
+                <Text style={tw`font-bold mb-2`}>P{item.prd_price}</Text>
               </>
             )}
           />
-          <Text style={tw`font-bold`}>Total: {totalPrice}</Text>
+          <Text style={tw`font-bold text-xl`}>Total: P{totalPrice}</Text>
 
           <Button
             title="Confirm Checkout"
