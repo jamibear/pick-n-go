@@ -24,7 +24,7 @@ Start the expo server and scan QR code using the Expo Go app
 $ npx expo start
 ```
 
-#TODOS
+# 🚧 TODOS 🚧
 
 ## user screens
 
