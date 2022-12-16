@@ -4,9 +4,11 @@ import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import tw from "twrnc";
+import { useState } from "react";
 
 const UltimateHeader = () => {
   const link = useLink();
+  const [query, setQuery] = useState("");
 
   return (
     <View
@@ -26,10 +28,12 @@ const UltimateHeader = () => {
       >
         <TextInput
           placeholder="Search"
+          value={query}
+          onChangeText={(text) => setQuery(text)}
           onSubmitEditing={() =>
             link.push({
               pathname: "user/search/[query]",
-              params: { query: "parsley" },
+              params: { query: query },
             })
           }
         />
@@ -121,6 +125,7 @@ export default function Home() {
         name="search"
         options={{
           // This tab will no longer show up in the tab bar.
+          headerTitle: (props) => <UltimateHeader {...props} />,
           href: null,
         }}
       />

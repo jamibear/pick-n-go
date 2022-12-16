@@ -8,3 +8,5 @@ export type Product = {
   img_url: string;
   created_at: string;
 };
+
+export const categories = []
