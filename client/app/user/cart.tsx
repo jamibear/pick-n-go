@@ -110,6 +110,7 @@ export default function Cart() {
     };
 
     deleteCart();
+          setModalVisible(!modalVisible);
   };
 
   return (
@@ -159,10 +160,12 @@ export default function Cart() {
             backgroundColor: "white",
             justifyContent: "flex-end",
             height: 200,
+            padding: 30,
           }}
         >
-          <Text style={tw`text-xl m-3`}>Your Items</Text>
+          <Text style={tw`text-xl`}>Your Items</Text>
           <FlatList
+            style={tw`p-3`}
             data={cart}
             renderItem={({ item }) => (
               <>
@@ -172,21 +175,24 @@ export default function Cart() {
                 />
                 <Text>{item.prd_title}</Text>
                 <Text>x{item.prd_quantity}</Text>
-                <Text style={tw`font-bold mb-2`}>P{item.prd_price}</Text>
+                <Text style={tw`font-bold pb-3 border-b border-gray-300 mb-2`}>
+                  P{item.prd_price}
+                </Text>
               </>
             )}
           />
-          <Text style={tw`font-bold text-xl`}>Total: P{totalPrice}</Text>
+          <Text style={tw`font-bold text-2xl`}>Total: P{totalPrice}</Text>
 
           <Button
             title="Confirm Checkout"
             buttonStyle={{
               backgroundColor: "rgba(78, 116, 289, 1)",
               borderRadius: 3,
+              alignSelf: "center",
             }}
             containerStyle={{
-              marginHorizontal: 50,
               marginVertical: 10,
+              alignSelf: "center",
             }}
             loading={loading}
             disabled={loading}

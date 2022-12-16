@@ -2,6 +2,7 @@ import { GetUserId } from "../lib/helpers";
 import { supabase } from "../lib/supabase";
 import { useEffect, useState } from "react";
 import { Text, View, Image, TouchableOpacity, Alert } from "react-native";
+import tw from "twrnc";
 
 type CartProps = {
   cart_id: number;
@@ -42,33 +43,42 @@ export default function CardItemCard({
     <View
       style={{
         backgroundColor: "white",
-        padding: 10,
+        padding: 30,
         borderBottomWidth: 1,
         borderBottomColor: "#efefef",
+        flexDirection: "row",
       }}
     >
-      <Image source={ thumbnail ? { uri: thumbnail } : null } style={{ width: 35, height: 35 }} />
-      <Text>{title}</Text>
-      <Text>{price}</Text>
-      <Text>{quantity}</Text>
-      <TouchableOpacity
-        style={{
-          padding: 3,
-          backgroundColor: "#efefef",
-        }}
-        onPress={() => updateQty("-")}
-      >
-        <Text>-</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{
-          padding: 3,
-          backgroundColor: "#efefef",
-        }}
-        onPress={() => updateQty("+")}
-      >
-        <Text>+</Text>
-      </TouchableOpacity>
+      <Image
+        source={thumbnail ? { uri: thumbnail } : null}
+        style={{ width: 50, height: 50 }}
+      />
+      <View style={tw`mx-3`}>
+        <Text style={tw`text-lg`}>{title}</Text>
+        <Text style={tw`font-bold`}>P{price}</Text>
+
+        <View
+          style={tw`mt-3 w-18 p-1 flex-row items-start rounded-full border-[1px] border-gray-500`}
+        >
+          <TouchableOpacity
+            style={{
+              flexGrow: 1,
+            }}
+            onPress={() => updateQty("-")}
+          >
+            <Text style={tw`text-center`}>-</Text>
+          </TouchableOpacity>
+          <Text>{quantity}</Text>
+          <TouchableOpacity
+            style={{
+              flexGrow: 1,
+            }}
+            onPress={() => updateQty("+")}
+          >
+            <Text style={tw`text-center`}>+</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }

@@ -3,7 +3,7 @@ import { Tab, Text, TabView } from "@rneui/themed";
 import tw from "twrnc";
 import Delivery from "screens/orders/Delivery";
 import History from "screens/orders/History";
-import ToRecieve from "screens/orders/History";
+import ToRecieve from "screens/orders/ToRecieve";
 
 export default () => {
   const [index, setIndex] = React.useState(0);
