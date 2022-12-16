@@ -63,20 +63,38 @@ export default function SignUp() {
       password: await AsyncStorage.getItem("signup_password"),
       options: {
         data: {
-          first_name: JSON.parse(await AsyncStorage.getItem("signup_firstname")),
-          last_name: JSON.parse(await AsyncStorage.getItem("signup_lastname")),
-          user_type: JSON.parse(await AsyncStorage.getItem("signup_usertype")),
-          username: JSON.parse(await AsyncStorage.getItem("signup_username")),
-          street: JSON.parse(await AsyncStorage.getItem("signup_street")),
-          region: JSON.parse(await AsyncStorage.getItem("signup_regionname")),
-          province: JSON.parse(await AsyncStorage.getItem("signup_provincename")),
-          city: JSON.parse(await AsyncStorage.getItem("signup_cityname")),
-          barangay: JSON.parse(await AsyncStorage.getItem("signup_brgyname")),
-          zipcode: JSON.parse(await AsyncStorage.getItem("signup_zipcode")),
+          first_name: 
+            await AsyncStorage.getItem("signup_firstname")
+          ,
+          last_name: 
+            await AsyncStorage.getItem("signup_lastname")
+          ,
+          user_type: 
+            await AsyncStorage.getItem("signup_usertype")
+          ,
+          username: 
+            await AsyncStorage.getItem("signup_username")
+          ,
+          street: await AsyncStorage.getItem("signup_street"),
+          region: 
+            await AsyncStorage.getItem("signup_regionname")
+          ,
+          province: 
+            await AsyncStorage.getItem("signup_provincename")
+          ,
+          city: await AsyncStorage.getItem("signup_cityname"),
+          barangay: 
+            await AsyncStorage.getItem("signup_brgyname")
+          ,
+          zipcode: 
+            await AsyncStorage.getItem("signup_zipcode")
+          ,
         },
       },
     });
-    error ? Alert.alert(error.message) : Alert.alert("Account sign up successful!");
+    error
+      ? Alert.alert(error.message)
+      : Alert.alert("Account sign up successful!");
     setLoading(false);
     link.push("/");
   };

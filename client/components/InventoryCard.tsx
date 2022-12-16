@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { supabase } from "../lib/supabase";
+import tw from "twrnc";
 
 export default function InventoryCard({
   id,
@@ -40,9 +41,8 @@ export default function InventoryCard({
                 : null
             }
           />
-          <Text>{title}</Text>
-          <Text>Price: {price}</Text>
-          <Text>Sold: {sold}</Text>
+          <Text style={tw`text-lg`}>{title}</Text>
+          <Text>Price: P{price}</Text>
         </TouchableOpacity>
       </Link>
       <TouchableOpacity style={{ width: 45 }} onPress={handleDelete}>
@@ -54,7 +54,7 @@ export default function InventoryCard({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 30,
     backgroundColor: "white",
     borderBottomColor: "#eeeeee",
     borderBottomWidth: 1,

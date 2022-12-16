@@ -1,12 +1,11 @@
 import "react-native-url-polyfill/auto";
 import { supabase } from "../../../lib/supabase";
-import { createClient } from "@supabase/supabase-js";
 import { useState } from "react";
-import { Alert, View, ScrollView } from "react-native";
+import { Alert, View, ScrollView, TouchableOpacity, Text } from "react-native";
 import { Button, Input } from "@rneui/base";
 import { Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { Picker } from "@react-native-picker/picker";
+import { categories } from "../../../constants";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -15,6 +14,7 @@ export default function Page() {
   const [price, setPrice] = useState("");
   const [variant, setVariant] = useState("");
   const [img_url, setImageUrl] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const [image, setImage] = useState(null);
   const categories = [
@@ -123,11 +123,6 @@ export default function Page() {
         placeholder="(e.g. 1kg)"
         autoCapitalize={"none"}
       />
-		<Picker>
-		{categories.map((category) => (
-		<Picker.Item label={category} value={category} />
-		))}
-		</Picker>
       <Button
         title={"ADD PRODUCT"}
         containerStyle={{
