@@ -6,6 +6,7 @@ import { Alert, View, ScrollView } from "react-native";
 import { Button, Input } from "@rneui/base";
 import { Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { Picker } from "@react-native-picker/picker";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -16,6 +17,18 @@ export default function Page() {
   const [img_url, setImageUrl] = useState("");
 
   const [image, setImage] = useState(null);
+  const categories = [
+    "Fruit",
+    "Vegetables",
+    "Poultry",
+    "Dairy",
+    "Grains",
+    "Herbs & Spices",
+    "Snacks",
+    "Leafy Greens",
+    "Dried Fruits",
+    "Ingredients",
+  ];
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -62,7 +75,7 @@ export default function Page() {
       throw error;
     }
 
-    const { error } = await supabase.from("products").insert([
+    const { data, error } = await supabase.from("products").insert([
       {
         user_id: await getData(),
         title: title,
@@ -72,6 +85,7 @@ export default function Page() {
         img_url: `https://mtvjqfbmffncybjbxixp.supabase.co/storage/v1/object/public/pickngo/${fileName}`,
       },
     ]);
+
     setLoading(false);
   };
 
@@ -109,6 +123,11 @@ export default function Page() {
         placeholder="(e.g. 1kg)"
         autoCapitalize={"none"}
       />
+		<Picker>
+		{categories.map((category) => (
+		<Picker.Item label={category} value={category} />
+		))}
+		</Picker>
       <Button
         title={"ADD PRODUCT"}
         containerStyle={{

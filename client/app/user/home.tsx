@@ -25,11 +25,11 @@ export default function Page() {
 
   useEffect(() => {
     getData();
-  });
+  }, [items]);
 
   return (
     <View>
-	 	<Text>Browse Products</Text>
+      <Text>Browse Products</Text>
       <FlatList
         data={items}
         numColumns={2}
