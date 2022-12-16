@@ -137,6 +137,14 @@ export default function Home() {
           href: null,
         }}
       />
+      <Tabs.Screen
+        // Name of the route to hide.
+        name="category"
+        options={{
+          // This tab will no longer show up in the tab bar.
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }
