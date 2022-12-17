@@ -31,7 +31,7 @@ export default function ProductCard({ id, title, price, variant, img_url }) {
           }
         />
         <Text style={tw`text-lg`}>{title}</Text>
-        <Text style={tw`font-bold`}>
+        <Text style={tw`text-lg font-bold`}>
           P{price}/{variant}
         </Text>
       </TouchableOpacity>
