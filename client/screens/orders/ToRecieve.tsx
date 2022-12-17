@@ -55,7 +55,6 @@ export default function Delivery() {
 		if (error) Alert.alert(error.message);
 
 		const { data } = await supabase.from("order_details").select().eq("id", id);
-		addToSales(data[0]);
 		setLoading(false);
 	};
 
