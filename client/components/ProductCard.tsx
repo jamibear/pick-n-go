@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { supabase } from "../lib/supabase";
+import tw from "twrnc";
 
 export default function ProductCard({ id, title, price, variant, img_url }) {
   const link = useLink();
@@ -15,16 +16,22 @@ export default function ProductCard({ id, title, price, variant, img_url }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => link.push({ pathname: "user/product/[id]", params: { id: id } })}
+        onPress={() =>
+          link.push({ pathname: "user/product/[id]", params: { id: id } })
+        }
       >
         <Image
           style={styles.tinyLogo}
-          source={ img_url ? {
-            uri: img_url,
-          } : null}
+          source={
+            img_url
+              ? {
+                  uri: img_url,
+                }
+              : null
+          }
         />
-        <Text>{title}</Text>
-        <Text>
+        <Text style={tw`text-lg`}>{title}</Text>
+        <Text style={tw`font-bold`}>
           P{price}/{variant}
         </Text>
       </TouchableOpacity>
